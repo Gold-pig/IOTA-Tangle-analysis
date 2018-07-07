@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+# import matplotlib.pyplot as plt
+=======
 # import json
 # trunk_hash = []
 # branch_hash = []
@@ -13,6 +16,7 @@
 #     print(trunk_hash)
 
 import matplotlib.pyplot as plt
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 import networkx as nx
 import json
 
@@ -25,8 +29,13 @@ data_map = dict()
 tip0 = []
 tip1 = []
 index = []
+<<<<<<< HEAD
+#with open("transaction_test_sqlexport.json") as f:
+with open("transactions_2016.json") as f:
+=======
 with open("transaction_test_sqlexport.json") as f:
 # with open("transactions_2016.json") as f:
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
       data = json.load(f)
       for element in data:
           del element['value']
@@ -38,6 +47,9 @@ with open("transaction_test_sqlexport.json") as f:
           del element['timestamp']
           del element['timestampDate']
 
+<<<<<<< HEAD
+
+=======
 # new_data = []
 # for i in range(len(data)):
 #     if data[i]['current_index'] == data[i]['last_index']:
@@ -82,28 +94,50 @@ with open("transaction_test_sqlexport.json") as f:
 #     # trunk_found = False
 #     # branch_found = False
 # #     for y in range(len(data)):
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 for x_idx, x in enumerate(data):
     for y_idy, y in enumerate(data):
         if data[x_idx]['last_index'] == 0:
             if data[x_idx]['hash'] == data[y_idy]['trunk_transaction_hash']:
                 tip0.append((y_idy,x_idx))     #tip0
+<<<<<<< HEAD
+            if data[x_idx]['hash'] == data[y_idy]['branch_transaction_hash']:
+                tip1.append((y_idy,x_idx))    #tip1
+
+=======
                 # trunk_found = True
             if data[x_idx]['hash'] == data[y_idy]['branch_transaction_hash']:
                 tip1.append((y_idy,x_idx))    #tip1
                 # branch_found = True
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 
         elif data[x_idx]['last_index'] != 0:
             if data[x_idx]['current_index'] < data[x_idx]['last_index']:
                  if data[x_idx]['hash'] == data[y_idy]['trunk_transaction_hash']:
                      index.append((y_idy,x_idx))
+<<<<<<< HEAD
+
+                 if data[x_idx]['hash'] == data[y_idy]['branch_transaction_hash']:
+                     tip0.append((y_idy,x_idx))
+
+=======
                  #     # trunk_found = True
                  if data[x_idx]['hash'] == data[y_idy]['branch_transaction_hash']:
                      tip0.append((y_idy,x_idx))
                      # branch_found = True
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 
             else:
                 if data[x_idx]['hash'] == data[y_idy]['trunk_transaction_hash']:
                     tip0.append((y_idy,x_idx))
+<<<<<<< HEAD
+
+
+                if data[x_idx]['hash'] == data[y_idy]['branch_transaction_hash']:
+                    tip1.append((y_idy,x_idx))
+
+
+=======
                     # trunk_found = True
 
                 if data[x_idx]['hash'] == data[y_idy]['branch_transaction_hash']:
@@ -111,6 +145,7 @@ for x_idx, x in enumerate(data):
                     # branch_found = True
         # if branch_found == True and trunk_found == True:
         #     break
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 print(tip0)
 print(tip1)
 print(index)
@@ -118,6 +153,28 @@ print(index)
 
 
 #convert the list to json then store in .json  6.7 8.31pm
+<<<<<<< HEAD
+def store(tip0):
+    with open('tip0.json', 'w') as f0:
+        f0.write(json.dumps(tip0))
+    with open('tip1.json', 'w') as f1:
+        f1.write(json.dumps(tip1))
+    with open('index.json', 'w') as f2:
+        f2.write(json.dumps(index))
+
+store(tip0)
+
+with open('tip0.json') as f1:
+    data1=json.load(f1)
+# print(type(data1))
+
+with open('tip0.json') as f2:
+    data2=json.load(f2)
+# print(type(data2))
+
+with open('tip0.json') as f3:
+    data3=json.load(f3)
+=======
 # def store(tip0):
 #     with open('tip0.json', 'w') as f0:
 #         f0.write(json.dumps(tip0))
@@ -138,6 +195,7 @@ print(index)
 #
 # with open('tip0.json') as f3:
 #     data3=json.load(f3)
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 
 
 
@@ -157,6 +215,25 @@ G = nx.DiGraph()
 #     b = trunk_hash[e][0]
 #
 #     G.add_edge(a, b)
+<<<<<<< HEAD
+for e in range(len(tip0)):
+
+    a = tip0[e][0]
+    b = tip0[e][1]
+    G.add_edge(a, b)
+for e in range(len(tip1)):
+
+    a = tip1[e][0]
+    b = tip1[e][1]
+    G.add_edge(a, b)
+for e in range(len(index)):
+
+    a = index[e][0]
+    b = index[e][1]
+    G.add_edge(a, b)
+
+
+=======
 # for e in range(len(tip0)):
 #
 #     a = tip0[e][0]
@@ -188,6 +265,7 @@ G = nx.DiGraph()
 #G.add_edge(g, b)
 #G.add_edge(d, b)
 
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 # write in UTF-8 encoding
 fh = open('edgelist.utf-8', 'wb')
 fh.write('# -*- coding: utf-8 -*-\n'.encode('utf-8'))  # encoding hint for emacs
@@ -203,6 +281,8 @@ H = nx.read_multiline_adjlist(fh, delimiter='\t', encoding='utf-8')
 
 #print(list(G.nodes()))
 
+<<<<<<< HEAD
+=======
 #distance=nx.dijkstra_path_length(G,a,b) #shortest distance
 #print(distance)
 #path=nx.dijkstra_path(G,a,e) #shortest path
@@ -210,6 +290,7 @@ H = nx.read_multiline_adjlist(fh, delimiter='\t', encoding='utf-8')
 #num_node=nx.number_of_nodes(G) #number of nodes
 #print(num_node)
 
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 # pos = nx.spring_layout(G)
 # nx.draw(G, pos, font_size=16, with_labels=False)
 # for p in pos:  # raise text positions
@@ -222,6 +303,41 @@ H = nx.read_multiline_adjlist(fh, delimiter='\t', encoding='utf-8')
 # print(G.out_degree())
 
 #degree calculation
+<<<<<<< HEAD
+degree_list=[]
+for k0 in range(len(G.degree())):
+  degree = G.degree(k0)
+  degree_list +=[degree]
+  if G.in_degree(k0) == max(degree_list):
+    print("This point dergree has the max degree :", k0)
+print(degree_list)
+print("max degree is :",max(degree_list))
+
+
+# #in-degree calculation
+in_degree_list = []
+for k1 in range(len(G.in_degree())):
+  in_degree = G.in_degree(k1)
+  in_degree_list +=[in_degree]
+  if G.in_degree(k1) == max(in_degree_list):
+      print("This point dergree has the max in_degree :", k1)
+print(in_degree_list)
+print("max in-degree is :",max(in_degree_list))
+#
+# #out-degree calculation
+out_degree_list = []
+for k2 in range(len(G.out_degree())):
+  out_degree = G.out_degree(k2)
+  out_degree_list +=[out_degree]
+  if G.out_degree(k2) == max(out_degree_list):
+    print("This point dergree has the max out_degree :", k2)
+
+print(out_degree_list)
+print("max out-degree is :",max(out_degree_list))
+
+
+
+=======
 # degree_list=[]
 # for k in range(len(G.degree())):
 #   degree = G.degree(k)
@@ -292,6 +408,7 @@ H = nx.read_multiline_adjlist(fh, delimiter='\t', encoding='utf-8')
 #
 # print(data[28])
 #
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
 # pos = nx.spring_layout(G)
 # nx.draw(G, pos, font_size=16, with_labels=False)
 # for p in pos:  # raise text positions
@@ -300,6 +417,8 @@ H = nx.read_multiline_adjlist(fh, delimiter='\t', encoding='utf-8')
 # plt.show()
 
 
+<<<<<<< HEAD
+=======
 ##所有节点度的分布表
 # degree_his = nx.degree_histogram(G)
 # x = range(len(degree_his))
@@ -309,3 +428,4 @@ H = nx.read_multiline_adjlist(fh, delimiter='\t', encoding='utf-8')
 # plt.show()
 
 # print(nx.diameter(G))
+>>>>>>> 822425ba534ddba21aff0613d7cb89cdb916f252
